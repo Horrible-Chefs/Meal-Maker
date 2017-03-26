@@ -7,3 +7,6 @@ Turning Ideas Into Reality
 
 ## Customers
 * Mainly Students and professionals who live alone, use cookbooks and looking for a quick fix
+
+## Horrible Chefs:
+* Munaf Arshad Qazi
