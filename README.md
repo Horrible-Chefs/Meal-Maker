@@ -13,3 +13,4 @@ Turning Ideas Into Reality
 * Jayesh Kishor Mhatre
 * Siddhartha Arora
 * Niha Jasmin Habul
+* Farhan Hasan
