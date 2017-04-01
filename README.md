@@ -14,3 +14,8 @@ Turning Ideas Into Reality
 * Siddhartha Arora
 * Niha Jasmin Habul
 * Farhan Hasan
+
+## Tech-Stuff & Citations
+* The Recipe Knowledgebase has been deployed on an mLab MongoDB instance. Credentials can be acquired from maqzi incase someone needs to access it.
+* Java-Mongo-Driver-3.4 (for android by matfur92) was used to connect to the server. It can be forked from [matfur92's github](https://github.com/matfur92/mongo-java-driver).
+* ServerTester 1.0 can be downloaded, studied and run directly on Android Studio, I've uploaded the complete source code. You'll just need the username, password and database name. 
