@@ -1,0 +1,18 @@
+[
+    {
+        "merged": "/home/munaf/Documents/NYU_I2R/Meal-Maker/MealMaker/app/build/intermediates/res/merged/debug/layout-v21/notification_template_custom_big.xml",
+        "source": "/home/munaf/.android/build-cache/7a6be0307a9dc67ead161add92d68e512215b1a9/output/res/layout-v21/notification_template_custom_big.xml"
+    },
+    {
+        "merged": "/home/munaf/Documents/NYU_I2R/Meal-Maker/MealMaker/app/build/intermediates/res/merged/debug/layout-v21/notification_template_icon_group.xml",
+        "source": "/home/munaf/.android/build-cache/7a6be0307a9dc67ead161add92d68e512215b1a9/output/res/layout-v21/notification_template_icon_group.xml"
+    },
+    {
+        "merged": "/home/munaf/Documents/NYU_I2R/Meal-Maker/MealMaker/app/build/intermediates/res/merged/debug/layout-v21/notification_action.xml",
+        "source": "/home/munaf/.android/build-cache/7a6be0307a9dc67ead161add92d68e512215b1a9/output/res/layout-v21/notification_action.xml"
+    },
+    {
+        "merged": "/home/munaf/Documents/NYU_I2R/Meal-Maker/MealMaker/app/build/intermediates/res/merged/debug/layout-v21/notification_action_tombstone.xml",
+        "source": "/home/munaf/.android/build-cache/7a6be0307a9dc67ead161add92d68e512215b1a9/output/res/layout-v21/notification_action_tombstone.xml"
+    }
+]
