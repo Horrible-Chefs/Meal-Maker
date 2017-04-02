@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "/home/munaf/Documents/NYU_I2R/Meal-Maker/MealMaker/app/build/intermediates/res/merged/debug/mipmap-xxxhdpi/ic_launcher.png",
+        "source": "/home/munaf/Documents/NYU_I2R/Meal-Maker/MealMaker/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/home/munaf/Documents/NYU_I2R/Meal-Maker/MealMaker/app/build/intermediates/res/merged/debug/mipmap-xxxhdpi/ic_launcher_round.png",
+        "source": "/home/munaf/Documents/NYU_I2R/Meal-Maker/MealMaker/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png"
+    }
+]

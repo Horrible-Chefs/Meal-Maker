@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="true"
+        jar="/home/munaf/Documents/NYU_I2R/Meal-Maker/MealMaker/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="c82741bc129dd5f99f11a4ab8666ae24262053b6">
+        <dex dex="/home/munaf/Documents/NYU_I2R/Meal-Maker/MealMaker/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run_5542aef291bc7a6591a1362d586398f007d6b906/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/home/munaf/Documents/NYU_I2R/Meal-Maker/MealMaker/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="71ac7e865bb921d189cea5252e38247eecaac438">
+        <dex dex="/home/munaf/Documents/NYU_I2R/Meal-Maker/MealMaker/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_b5434d8c7f0239fd4875ec5a54b9ccadb39bc0f3/classes.dex" />
+    </item>
+
+</items>
