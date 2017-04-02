@@ -1,4 +1,0 @@
-#Sat Apr 01 23:27:53 EDT 2017
-base.0=/home/munaf/Documents/NYU_I2R/Meal-Maker/MealMaker/app/build/intermediates/transforms/dex/debug/folders/1000/5/slice_5
-renamed.0=classes.dex
-file.0=/home/munaf/Documents/NYU_I2R/Meal-Maker/MealMaker/app/build/intermediates/transforms/dex/debug/folders/1000/5/slice_5/classes.dex
