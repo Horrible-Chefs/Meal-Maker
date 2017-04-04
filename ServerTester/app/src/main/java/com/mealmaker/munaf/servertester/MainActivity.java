@@ -77,14 +77,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Log.i("Trying: ","Going in!");
-                Document findQuery = new Document("name", "munaf");
+                Document findQuery = new Document("title", "Cajun Chicken Pasta");
                 MongoCursor<Document> cursor = collection.find(findQuery).iterator();
                 try {
                     while (cursor.hasNext()) {
                         Document doc = cursor.next();
                         Log.i("RECEIVED: ",doc.toJson());
-                        String s = "Querying the server... User: " + doc.get("name") + ", has the email: " + doc.get("email") +
-                                ". If you're seeing this the demo is working. Feels great right?\n";
+                        String s = "Querying the server for Cajun Chicken Pasta...\n" + doc.get("title") + ", can be found at: " + doc.get("source_url") +
+                                ".\nIf you're seeing this the demo is working. Feels great right?\n";
                         tv.append(s);
                     }
                 } finally {
