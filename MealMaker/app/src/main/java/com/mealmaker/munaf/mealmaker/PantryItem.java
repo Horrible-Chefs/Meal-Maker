@@ -1,10 +1,9 @@
 package com.mealmaker.munaf.mealmaker;
 
-/**
- * Created by munaf on 4/1/17.
- */
+import java.io.Serializable;
 
-public class PantryItem {
+
+public class PantryItem implements Serializable {
 
     public  final Integer id;
     public static final Float DEFAULT_QUANTITY = 0f;
