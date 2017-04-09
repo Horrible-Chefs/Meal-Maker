@@ -25,6 +25,8 @@ public class PantryItem implements Serializable {
         this.quantity = quantity;
     }
 
+
+
     public Integer getId() {
         return id;
     }

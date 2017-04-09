@@ -27,11 +27,15 @@ public class MyPantry extends AppCompatActivity{
 
         //Fill DB for testing
         Log.i(TAG,"Inserting/Deleting items");
-//        db.addItem(new PantryItem("Broccoli Cheese Soup"));//DOCUMENT'S KEY SHOULD BE SET AS 'TITLE' (NO CAPS) IN SEARCHENGINE.FINDEXACT
-//        db.deleteItem("Broccoli Cheese Soup");
+//db.addItem(new PantryItem("Broccoli Cheese Soup"));//DOCUMENT'S KEY SHOULD BE SET AS 'TITLE' (NO CAPS) IN SEARCHENGINE.FINDEXACT
+        db.deleteItem("Broccoli Cheese Soup");
 //        db.addItem(new PantryItem("The Pioneer Woman")); //DOCUMENT'S KEY SHOULD BE SET AS 'PUBLISHER' (NO CAPS) IN SEARCHENGINE.FINDEXACT
 //        db.deleteItem("The Pioneer Woman");
         Log.i(TAG,"Inserted/Deleted items");
+        db.deleteItem("Milk");
+        db.deleteItem("Eggs");
+        db.deleteItem("Meat");
+        //db.deleteItem("");
 
         Log.i("MyPantry: ", "Reading all items..");
         final ArrayList<PantryItem> list = (ArrayList) db.getAllItems();
@@ -48,6 +52,10 @@ public class MyPantry extends AppCompatActivity{
             @Override
             public void onClick(View v) {
                 Log.i(TAG,"Should access add more stub");
+                Intent intent_AddMore = new Intent(getApplicationContext(),AddMore.class);
+
+                startActivity(intent_AddMore);
+
             }
         });
 
@@ -59,6 +67,8 @@ public class MyPantry extends AppCompatActivity{
                 intent_imhungry.putExtra("pantry_data",list);
                 startActivity(intent_imhungry);
             }
+
+
         });
 
     }

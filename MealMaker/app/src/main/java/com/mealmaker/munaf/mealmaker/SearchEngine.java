@@ -15,9 +15,9 @@ import java.util.ArrayList;
 
 public class SearchEngine {
 
-    private static final String username = "";
-    private static final String password = "";
-    private static final String dbName = "";
+    private static final String username = "developer1";
+    private static final String password = "mealmaker1";
+    private static final String dbName = "mealmakerdata";
     private static final String TAG = "SearchEngine";
 
     static MongoClient mongoClient;
