@@ -20,7 +20,7 @@ public class AddMore extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 EditText Item = (EditText) findViewById(R.id.editText1);
-                EditText Quant = (EditText) findViewById(R.id.editText2);
+               // EditText Quant = (EditText) findViewById(R.id.editText2);
                 String Item_S = Item.getText().toString();
                // String Quant_S = Quant.getText().toString();
                db.addItem(new PantryItem(Item_S));
