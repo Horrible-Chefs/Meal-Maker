@@ -12,7 +12,7 @@ import java.util.List;
 public class DBHandler extends SQLiteOpenHelper {
 
     // Database Version
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
     // Database Name
     private static final String DATABASE_NAME = "PANTRY";
     // table name
@@ -44,23 +44,37 @@ public class DBHandler extends SQLiteOpenHelper {
 
     // Adding new item
     public void addItem(PantryItem pantryItem) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put(KEY_NAME, pantryItem.getName()); // Item Name
-        values.put(KEY_QUANTITY, pantryItem.getQuantity()); // Quantity
+        Boolean exists = itemExists(pantryItem);
+        if (!exists) {
+            SQLiteDatabase db = this.getWritableDatabase();
+            ContentValues values = new ContentValues();
+            values.put(KEY_NAME, pantryItem.getName()); // Item Name
+            values.put(KEY_QUANTITY, pantryItem.getQuantity()); // Quantity
 
-        // Inserting Row
-        db.insert(TABLE_CurrentItems, null, values);
-        db.close(); // Closing database connection
+            // Inserting Row
+            db.insert(TABLE_CurrentItems, null, values);
+            db.close(); // Closing database connection
+        }
     }
 
+
+
+    public Boolean itemExists(PantryItem pantryItem){
+        Boolean exists = false;
+        List<PantryItem> list = getAllItems();
+        for (PantryItem item : list){
+            if(pantryItem.getName().equals(item.getName())){
+                exists = true;
+            }
+        }
+        return exists;
+    }
 
     // Getting one item
     public PantryItem getPantryItem(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
 
-        Cursor cursor = db.query(TABLE_CurrentItems, new String[]{KEY_ID,
-                KEY_NAME, KEY_QUANTITY}, KEY_ID + "=?",
+        Cursor cursor = db.query(TABLE_CurrentItems, new String[]{KEY_ID, KEY_NAME, KEY_QUANTITY}, KEY_ID + "=?",
         new String[]{String.valueOf(id)}, null, null, null, null);
         if (cursor != null)
             cursor.moveToFirst();
@@ -125,6 +139,20 @@ public class DBHandler extends SQLiteOpenHelper {
         db.delete(TABLE_CurrentItems, KEY_ID + " = ?",
         new String[] { String.valueOf(pantryItem.getId()) });
         db.close();
+    }
+
+    //BE CAREFUL WITH THIS ONE
+    public void deleteAll(){
+        List<PantryItem> pantryItems = getAllItems();
+        for (PantryItem item : pantryItems){
+            deleteItem(item);
+        }
+    }
+
+    //DO NOT USE THIS FOR DELETING ITEMS. IT WILL MESS UP THE DB. ONLY USE IT WHEN DELETING THE WHOLE DB
+    public void dropTable(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_CurrentItems);
     }
 
     public void deleteItem(String name){
