@@ -42,6 +42,9 @@ public class ImHungry extends AppCompatActivity{
             }
         } finally {
             results.close();
+            if (tv.getText().equals("")){
+                tv.append("Found Nothing, Sorry!");
+            }
         }
         Button back = (Button) findViewById(R.id.btn_back);
         back.setOnClickListener(new View.OnClickListener() {

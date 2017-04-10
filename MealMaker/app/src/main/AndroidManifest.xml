@@ -23,7 +23,9 @@
         <activity
             android:name=".ImHungry"
             android:label="I&apos;m Hungry!"></activity>
-        <activity android:name=".AddMore"></activity>
-    </application>
+        <activity android:name=".AddMore"
+            android:label="Add Items to Pantry"></activity>
+
+</application>
 
 </manifest>

@@ -35,7 +35,7 @@ public class SearchEngine {
 
     public MongoCursor<Document> findExact(ArrayList<PantryItem> pantry){
         //need to make the searching more elegant. This is just a place holder function atm, need to know the
-        //exact structure of ingredients on the server to implement thiss properly.
+        //exact structure of ingredients on the server to implement this properly.
         //CHANGE TITLE TO INGREDIENTS OR WHATEVER THE KEY IS ON THE SERVER
         Document findQuery = new Document("title", convertList(pantry));
         return collection.find(findQuery).iterator();
