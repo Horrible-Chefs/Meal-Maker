@@ -10,7 +10,7 @@ Turning Ideas Into Reality
 
 ## Horrible Chefs:
 * Munaf Arshad Qazi
-* Jayesh K. Mhatre
+* Jayesh Mhatre
 * Siddhartha Arora
 * Niha Jasmin Habul
 * Farhan Hasan
