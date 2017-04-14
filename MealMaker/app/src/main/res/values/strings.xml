@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">MealMaker</string>
+    <string-array name="Items">
+        <item> Chicken</item>
+        <item> Carrots</item>
+        <item> Meat</item>
+        <item> Milk</item>
+        <item> Mango</item>
+        <item> Bread</item>
+        <item> Eggs</item>
+        <item> Cajun Chicken Pasta</item>
+    </string-array>
+</resources>
