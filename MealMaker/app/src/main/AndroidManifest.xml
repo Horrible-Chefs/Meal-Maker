@@ -13,7 +13,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".MyPantry"
-            android:label="My Pantry">
+            android:label="Meal Maker">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
