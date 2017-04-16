@@ -6,11 +6,11 @@ Turning Ideas Into Reality
 * What could’ve they cooked with just one or two extra ingredients?
 
 ## Customers
-* Mainly Students and professionals who live alone, use cookbooks and looking for a quick fix
+* Mainly Students and professionals who live alone, use cookbooks and looking for a quick fix.
 
 ## Horrible Chefs:
 * Munaf Arshad Qazi
-* Jayesh Kishor Mhatre
+* Jayesh Mhatre
 * Siddhartha Arora
 * Niha Jasmin Habul
 * Farhan Hasan
