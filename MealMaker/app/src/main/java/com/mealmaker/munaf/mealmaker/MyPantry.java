@@ -19,7 +19,7 @@ public class MyPantry extends AppCompatActivity{
 
     private final static String TAG = "MyPantry";
     private DBHandler db;
-//    private TextView tv;
+    private TextView tv;
     private ListView lv;
     private ArrayList<String> list = new ArrayList<>();
     private ArrayAdapter<String> adapter;
@@ -31,7 +31,7 @@ public class MyPantry extends AppCompatActivity{
         setContentView(R.layout.mypantrylayout);
 
         db = new DBHandler(this);
-//        tv = (TextView) findViewById(R.id.tv_pantrylist);
+        tv = (TextView) findViewById(R.id.tv_empty);
         ImageButton addMore = (ImageButton) findViewById(R.id.btn_addmore);
         ImageButton imHungry = (ImageButton) findViewById(R.id.btn_imhungry);
         ImageButton reset = (ImageButton) findViewById(R.id.btn_reset);
@@ -102,15 +102,15 @@ public class MyPantry extends AppCompatActivity{
 
     private void refresh(){
         Log.i("MyPantry: ", "Reading all items..");
-//        tv.setText("");
         allItems = (ArrayList) db.getAllItems();
         for (PantryItem item : allItems){
             if(!list.contains(item.getName())){
                 list.add(item.getName());
             }
         }
+        tv.setText("");
         if(list.isEmpty()){
-//            tv.setText("Nothing in your Pantry!");
+            tv.setText("it's lonely in here..");
         }
         adapter = new ArrayAdapter<>(
                 this,

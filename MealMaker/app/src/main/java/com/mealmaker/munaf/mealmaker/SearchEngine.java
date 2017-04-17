@@ -41,6 +41,11 @@ public class SearchEngine {
         return collection.find(findQuery).iterator();
     }
 
+    public MongoCursor<Document> findPublisher(ArrayList<PantryItem> pantry){
+        Document findQuery = new Document("publisher", convertList(pantry));
+        return collection.find(findQuery).iterator();
+    }
+
     public String convertList(ArrayList<PantryItem> pantry){
         String s = "";
         for (PantryItem p : pantry){
