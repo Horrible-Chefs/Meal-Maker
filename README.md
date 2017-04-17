@@ -1,4 +1,4 @@
-# Meal Maker version 1
+# Meal Maker
 Turning Ideas Into Reality
 
 ## Problem Statement
