@@ -25,7 +25,8 @@
             android:label="I&apos;m Hungry!" />
         <activity
             android:name=".AddMore"
-            android:label="Add Items to Pantry" />
+            android:label="Add Items to Pantry"
+            android:theme="@style/AppTheme.CustomThemePopUpWindow"/>
         <activity
             android:name=".RecipeList"
             android:label="@string/title_activity_recipe_list"
