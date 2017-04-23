@@ -12,6 +12,11 @@ import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
+
+import static com.mongodb.client.model.Filters.all;
+import static com.mongodb.client.model.Filters.in;
 
 public class SearchEngine {
 
@@ -30,28 +35,59 @@ public class SearchEngine {
     public SearchEngine(){
         mongoClient = new MongoClient(uri);
         database = mongoClient.getDatabase(dbName);
-        collection = database.getCollection("test");
+        collection = database.getCollection("cookbook");
     }
 
-    public MongoCursor<Document> findExact(ArrayList<PantryItem> pantry){
-        //need to make the searching more elegant. This is just a place holder function atm, need to know the
-        //exact structure of ingredients on the server to implement this properly.
-        //CHANGE TITLE TO INGREDIENTS OR WHATEVER THE KEY IS ON THE SERVER
-        Document findQuery = new Document("title", convertList(pantry));
-        return collection.find(findQuery).iterator();
+    public Iterator<Document> findExact(ArrayList<PantryItem> pantry){
+        MongoCursor<Document> allResults = findAll(pantry);
+        ArrayList<String> pantryItems = convertPListToTitleList(pantry);
+        ArrayList<Document> exactResults = new ArrayList<>();
+        while (allResults.hasNext()){
+            Document doc = allResults.next();
+            Integer found = 0;
+            ArrayList<String> searchTerms = (ArrayList<String>) doc.get("search_terms");
+            for (String term : searchTerms){
+                if(pantryItems.contains(term)){
+                    found++;
+                }
+            }
+            if(found==searchTerms.size()){
+                Log.i(TAG,"FOUND: "+doc.toJson());
+                exactResults.add(doc);
+            }
+        }
+        return exactResults.iterator();
+    }
+
+    public MongoCursor<Document> findAll(ArrayList<PantryItem> pantry){
+        Log.i(TAG,convertList(pantry));
+        return collection.find(in("search_terms", convertPListToTitleList(pantry))).iterator();
     }
 
     public MongoCursor<Document> findPublisher(ArrayList<PantryItem> pantry){
-        Document findQuery = new Document("publisher", convertList(pantry));
+        Document findQuery = new Document("title", convertList(pantry));
         return collection.find(findQuery).iterator();
     }
 
     public String convertList(ArrayList<PantryItem> pantry){
         String s = "";
         for (PantryItem p : pantry){
-            s = s+p.getName()+" ";
+            s = s+p.getName().trim().toLowerCase()+" ";
         }
         Log.i(TAG,s);
         return s.trim();
+    }
+
+    public ArrayList<String> convertPListToTitleList(ArrayList<PantryItem> pantry){
+        ArrayList<String> s = new ArrayList<>();
+        for (PantryItem p : pantry){
+            s.add(p.getName().trim().toLowerCase());
+        }
+        Log.i(TAG,s.toString());
+        return s;
+    }
+
+    public void disconnectService(){
+        mongoClient.close();
     }
 }

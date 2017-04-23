@@ -13,23 +13,37 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".MyPantry"
-            android:label="Meal Maker">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            android:label="My Pantry">
         </activity>
         <activity
             android:name=".ImHungry"
             android:label="I&apos;m Hungry!" />
         <activity
             android:name=".AddMore"
-            android:label="Add Items to Pantry" />
+            android:label="Add Items to Pantry"
+            android:theme="@style/AppTheme.CustomThemePopUpWindow" />
         <activity
             android:name=".RecipeList"
             android:label="@string/title_activity_recipe_list"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".WhatIf"
+            android:label="@string/title_activity_what_if"
+            android:parentActivityName=".ImHungry">
+            <!--<meta-data-->
+                <!--android:name="android.support.PARENT_ACTIVITY"-->
+                <!--android:value="com.mealmaker.munaf.mealmaker.ImHungry" />-->
+        </activity>
+        <activity
+            android:name=".HomeScreen"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="MealMaker"
+            android:theme="@style/FullscreenTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

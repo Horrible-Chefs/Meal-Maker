@@ -1,28 +1,19 @@
 package com.mealmaker.munaf.mealmaker;
 
 import android.app.Dialog;
-import android.app.ProgressDialog;
-import android.content.Intent;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.OvalShape;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.StrictMode;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Map;
 
 import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.getbase.floatingactionbutton.FloatingActionsMenu;
@@ -33,9 +24,15 @@ import org.bson.Document;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class ImHungry extends AppCompatActivity {
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
-    private final static String TAG = "ImHungry";
+
+public class WhatIf extends AppCompatActivity {
+
+    private final static String TAG = "WhatIf";
     private ArrayList<Information> recipeNames = new ArrayList<>();
     private HashMap<String, String> queryResult = new HashMap<>();
     private ArrayList<Information> vegRecipeNames;
@@ -46,18 +43,15 @@ public class ImHungry extends AppCompatActivity {
     private MyCustomAdapter myCustomAdapter;
     private MyCustomAdapter myVegAdapter;
     private MyCustomAdapter myNonVegAdapter;
-    private TextView tv;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Log.i(TAG, "Starting Im Hungry");
+        Log.i(TAG, "Starting What If");
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.imhungrylayout);
-        recyclerView = (RecyclerView) findViewById(R.id.recycleView);
-        tv = (TextView) findViewById(R.id.tv_recipeResults);
+        setContentView(R.layout.activity_what_if);
+        recyclerView = (RecyclerView) findViewById(R.id.recycleView_whatif);
 
-        final FloatingActionButton actionVeg = (FloatingActionButton) findViewById(R.id.action_veg);
+        final FloatingActionButton actionVeg = (FloatingActionButton) findViewById(R.id.action_veg_whatif);
         actionVeg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -76,19 +70,19 @@ public class ImHungry extends AppCompatActivity {
                         Log.e(TAG, "JSON Parsing error.");
                     }
                 }
-                myVegAdapter = new MyCustomAdapter(ImHungry.this, vegRecipeNames, vegResults);
+                myVegAdapter = new MyCustomAdapter(WhatIf.this, vegRecipeNames, vegResults);
                 recyclerView.setAdapter(myVegAdapter);
-                GridLayoutManager staggeredGridLayoutManager = new GridLayoutManager(ImHungry.this, 2);
+                GridLayoutManager staggeredGridLayoutManager = new GridLayoutManager(WhatIf.this, 2);
                 recyclerView.setLayoutManager(staggeredGridLayoutManager);
             }
         });
 
-        final FloatingActionButton actionNonVeg = (FloatingActionButton) findViewById(R.id.action_nonveg);
+        final FloatingActionButton actionNonVeg = (FloatingActionButton) findViewById(R.id.action_nonveg_whatif);
         actionNonVeg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.i(TAG, "Fitlering Non Veg only");
-//                    if current adapter is not veg
+//                    if current adapter is not nonveg
                 nVegRecipeNames = new ArrayList<>();
                 nonVegResults = new HashMap<>();
                 for (Map.Entry<String, String> eachResult : queryResult.entrySet()) {
@@ -102,45 +96,34 @@ public class ImHungry extends AppCompatActivity {
                         Log.e(TAG, "JSON Parsing error.");
                     }
                 }
-                myNonVegAdapter = new MyCustomAdapter(ImHungry.this, nVegRecipeNames, nonVegResults);
+                myNonVegAdapter = new MyCustomAdapter(WhatIf.this, nVegRecipeNames, nonVegResults);
                 recyclerView.setAdapter(myNonVegAdapter);
-                GridLayoutManager staggeredGridLayoutManager = new GridLayoutManager(ImHungry.this, 2);
+                GridLayoutManager staggeredGridLayoutManager = new GridLayoutManager(WhatIf.this, 2);
                 recyclerView.setLayoutManager(staggeredGridLayoutManager);
             }
         });
 
-        final FloatingActionButton actionAll = (FloatingActionButton) findViewById(R.id.action_all);
+        final FloatingActionButton actionAll = (FloatingActionButton) findViewById(R.id.action_all_whatif);
         actionAll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Log.i(TAG, "Showing everything");
                 recyclerView.setAdapter(myCustomAdapter);
-                GridLayoutManager staggeredGridLayoutManager = new GridLayoutManager(ImHungry.this, 2);
+                GridLayoutManager staggeredGridLayoutManager = new GridLayoutManager(WhatIf.this, 2);
                 recyclerView.setLayoutManager(staggeredGridLayoutManager);
             }
         });
 
+        final FloatingActionsMenu menuMultipleFiltering = (FloatingActionsMenu) findViewById(R.id.multiple_filtering_whatif);
+        Log.i(TAG,"getting bundles");
         final ArrayList<PantryItem> pantryData = (ArrayList<PantryItem>) getIntent().getSerializableExtra("pantry_data");
-
-        final FloatingActionButton action_whatIf = (FloatingActionButton) findViewById(R.id.action_whatif);
-        action_whatIf.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Log.i(TAG,"Should access what if stub");
-                Intent intent_whatIf = new Intent(getApplicationContext(), WhatIf.class);
-                intent_whatIf.putExtra("pantry_data", pantryData);
-                startActivity(intent_whatIf);
-            }
-        });
-
-         final FloatingActionsMenu menuMultipleActions = (FloatingActionsMenu) findViewById(R.id.multiple_actions);
-        new AsyncServerAccess().execute(pantryData);
+        new WhatIf.AsyncServerAccess().execute(pantryData);
     }
 
-    private class AsyncServerAccess extends AsyncTask <ArrayList<PantryItem>,Void,Void>{
+    private class AsyncServerAccess extends AsyncTask<ArrayList<PantryItem>,Void,Void> {
         private String TAG = "Async";
         private AVLoadingIndicatorView avi;
-        private final Dialog dialog = new Dialog(ImHungry.this);
+        private final Dialog dialog = new Dialog(WhatIf.this);
 
         @Override
         protected void onPreExecute() {
@@ -155,14 +138,14 @@ public class ImHungry extends AppCompatActivity {
         @Override
         protected Void doInBackground(ArrayList<PantryItem>...pantryData) {
             final SearchEngine searchEngine = new SearchEngine();
-            Iterator<Document> results = searchEngine.findExact(pantryData[0]);
+            MongoCursor<Document> results = searchEngine.findAll(pantryData[0]);
             while (results.hasNext()) {
                 Document doc = results.next();
                 Log.i(TAG, "RECEIVED: " + doc.toJson());
                 recipeNames.add(new Information(R.drawable.recipe_logo, doc.get("title").toString()));
                 queryResult.put(doc.get("title").toString(), doc.toJson());
             }
-            myCustomAdapter = new MyCustomAdapter(ImHungry.this, recipeNames, queryResult);
+            myCustomAdapter = new MyCustomAdapter(WhatIf.this, recipeNames, queryResult);
             searchEngine.disconnectService();
             return null;
         }
@@ -170,7 +153,7 @@ public class ImHungry extends AppCompatActivity {
         @Override
         protected void onPostExecute(Void result) {
             recyclerView.setAdapter(myCustomAdapter);
-            GridLayoutManager staggeredGridLayoutManager = new GridLayoutManager(ImHungry.this, 2);
+            GridLayoutManager staggeredGridLayoutManager = new GridLayoutManager(WhatIf.this, 2);
             recyclerView.setLayoutManager(staggeredGridLayoutManager);
             stopAnim();
             dialog.dismiss();
@@ -184,8 +167,6 @@ public class ImHungry extends AppCompatActivity {
         void stopAnim() {
             avi.smoothToHide();
         }
-
-
     }
 }
 

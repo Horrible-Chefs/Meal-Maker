@@ -1,17 +1,25 @@
 package com.mealmaker.munaf.mealmaker;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ShapeDrawable;
+import android.graphics.drawable.shapes.OvalShape;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.getbase.floatingactionbutton.FloatingActionButton;
+import com.getbase.floatingactionbutton.FloatingActionsMenu;
 
 import java.util.ArrayList;
 
@@ -31,32 +39,9 @@ public class MyPantry extends AppCompatActivity{
         setContentView(R.layout.mypantrylayout);
 
         db = new DBHandler(this);
-        tv = (TextView) findViewById(R.id.tv_empty);
-        ImageButton addMore = (ImageButton) findViewById(R.id.btn_addmore);
-        ImageButton imHungry = (ImageButton) findViewById(R.id.btn_imhungry);
-        ImageButton reset = (ImageButton) findViewById(R.id.btn_reset);
 
-        //Fill DB for testing
-        Log.i(TAG,"Inserting/Deleting items");
-        Log.i(TAG,"Inserted/Deleted items");
-
-        refresh();
-        registerClickCallback();
-
-
-        reset.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                db.deleteAll();
-                list.clear();
-                refresh();
-                String message = "pushed everything down the drain!";
-                Toast.makeText(MyPantry.this,message,Toast.LENGTH_LONG).show();
-
-            }
-        });
-
-        addMore.setOnClickListener(new View.OnClickListener() {
+        final View actionB = findViewById(R.id.action_addmore);
+        actionB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.i(TAG,"Should access add more stub");
@@ -66,17 +51,43 @@ public class MyPantry extends AppCompatActivity{
             }
         });
 
-        imHungry.setOnClickListener(new View.OnClickListener() {
+        FloatingActionButton actionC = new FloatingActionButton(getBaseContext());
+        actionC.setIcon(R.drawable.trash_icon);
+        actionC.setTitle("Delete All");
+        actionC.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                db.deleteAll();
+                list.clear();
+                refresh();
+                String message = "pushed everything down the drain!";
+                Toast.makeText(MyPantry.this,message,Toast.LENGTH_LONG).show();
+            }
+        });
+
+        final FloatingActionsMenu menuMultipleActions = (FloatingActionsMenu) findViewById(R.id.multiple_actions);
+        menuMultipleActions.addButton(actionC);
+
+        final FloatingActionButton actionA = (FloatingActionButton) findViewById(R.id.action_imhungry);
+        actionA.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
                 Log.i(TAG,"Should access im hungry stub");
                 Intent intent_imhungry = new Intent(getApplicationContext(), ImHungry.class);
                 intent_imhungry.putExtra("pantry_data", allItems);
                 startActivity(intent_imhungry);
             }
-
-
         });
+
+        tv = (TextView) findViewById(R.id.tv_empty);
+
+        //Fill DB for testing
+        Log.i(TAG,"Inserting/Deleting items");
+        Log.i(TAG,"Inserted/Deleted items");
+
+        refresh();
+        registerClickCallback();
+//        changeStatusBarColor();
     }
 
     @Override
@@ -120,4 +131,12 @@ public class MyPantry extends AppCompatActivity{
         lv = (ListView) findViewById(R.id.listview_pantry);
         lv.setAdapter(adapter);
     }
+
+    //    private void changeStatusBarColor() {
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+//            Window window = getWindow();
+//            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+//            window.setStatusBarColor(Color.BLACK);
+//        }
+//    }
 }
