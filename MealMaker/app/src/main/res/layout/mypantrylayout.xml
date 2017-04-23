@@ -5,8 +5,8 @@
     xmlns:fab="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg_screen1">
-
+    >
+    <!--android:background="@color/bg_screen1"-->
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -25,7 +25,7 @@
             android:layout_marginTop="8dp"
             android:elevation="12dp"
             android:fontFamily="casual"
-            android:textColor="@android:color/white"
+            android:textColor="@color/golden"
             android:textSize="@dimen/slide_title"
             android:textStyle="bold"
             android:text="My Pantry"
@@ -71,6 +71,7 @@
             android:fontFamily="casual"
             android:textAppearance="@style/TextAppearance.AppCompat.Display2"
             android:textSize="18sp"
+            android:textColor="@color/golden"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintHorizontal_bias="0.501"
             app:layout_constraintLeft_toLeftOf="parent"

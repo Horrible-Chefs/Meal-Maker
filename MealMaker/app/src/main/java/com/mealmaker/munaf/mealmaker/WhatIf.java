@@ -156,7 +156,7 @@ public class WhatIf extends AppCompatActivity {
             GridLayoutManager staggeredGridLayoutManager = new GridLayoutManager(WhatIf.this, 2);
             recyclerView.setLayoutManager(staggeredGridLayoutManager);
             stopAnim();
-            dialog.hide();
+            dialog.dismiss();
             super.onPostExecute(result);
         }
 

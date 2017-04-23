@@ -95,4 +95,8 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+
+    <string name="title_activity_home_screen">HomeScreen</string>
+    <string name="home_button">Go to Pantry</string>
+    <string name="home_content">MealMaker</string>
 </resources>

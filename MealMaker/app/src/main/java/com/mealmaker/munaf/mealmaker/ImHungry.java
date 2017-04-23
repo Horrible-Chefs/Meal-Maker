@@ -173,7 +173,7 @@ public class ImHungry extends AppCompatActivity {
             GridLayoutManager staggeredGridLayoutManager = new GridLayoutManager(ImHungry.this, 2);
             recyclerView.setLayoutManager(staggeredGridLayoutManager);
             stopAnim();
-            dialog.hide();;
+            dialog.dismiss();
             super.onPostExecute(result);
         }
 

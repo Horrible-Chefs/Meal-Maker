@@ -16,19 +16,19 @@
 
         <ImageView
             android:id="@+id/img_row"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_gravity="center"
             android:layout_margin="7dp"
             android:cropToPadding="false" />
-
 
         <TextView
             android:id="@+id/txv_row"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_gravity="center_horizontal"
-            android:layout_marginLeft="10dp"
-            android:text="Hello! how are you"
+            android:layout_marginLeft="1dp"
+            android:text="Recipe Name"
             android:textAlignment="center"
             android:textAppearance="@style/TextAppearance.AppCompat.Display1"
             android:textSize="24sp"
