@@ -18,8 +18,8 @@
 
     <TextView
         android:id="@+id/ItemName"
-        android:layout_width="98dp"
-        android:layout_height="32dp"
+        android:layout_width="151dp"
+        android:layout_height="40dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
@@ -27,12 +27,17 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="Enter the Item"
+        android:textAlignment="center"
+        android:textColor="@color/pink_pressed"
+        android:textSize="18sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.032"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.084" />
+        app:layout_constraintVertical_bias="0.089"
+        tools:layout_editor_absoluteX="90dp"
+        tools:layout_editor_absoluteY="53dp" />
 
     <AutoCompleteTextView
         android:id="@+id/editText1"
@@ -50,11 +55,11 @@
         android:nextFocusUp="@id/editText1"
         android:text=""
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.084" />
+        app:layout_constraintVertical_bias="0.251" />
 
 
     <Button
@@ -95,4 +100,5 @@
         tools:context="@color/colorPrimary">
 
     </android.support.design.widget.CoordinatorLayout>
+
 </android.support.constraint.ConstraintLayout>

@@ -3,11 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/colorPrimary"
+    android:background="@color/black_semi_transparent"
     android:elevation="12dp"
     android:textAlignment="center"
     android:textAppearance="@style/TextAppearance.AppCompat.Notification.Media"
-    android:textColor="@android:color/background_light"
+    android:textColor="@color/white_pressed"
     android:textSize="24sp"
     tools:textAlignment="center">
 

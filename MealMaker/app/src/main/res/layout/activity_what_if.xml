@@ -2,7 +2,6 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:src="@drawable/foodbg"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -10,7 +9,7 @@
     >
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/imageView_whatif"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:srcCompat="@drawable/foodbg"
@@ -20,7 +19,7 @@
         />
 
     <TextView
-        android:id="@+id/tv_recipeResults"
+        android:id="@+id/tv_recipeResults_whatif"
         android:layout_width="326dp"
         android:layout_height="360dp"
         android:layout_marginBottom="8dp"
@@ -36,7 +35,7 @@
         android:layout_marginEnd="8dp" />
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycleView"
+        android:id="@+id/recycleView_whatif"
         android:layout_width="372dp"
         android:layout_height="552dp"
         android:layout_marginBottom="10dp"
@@ -53,7 +52,7 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <com.getbase.floatingactionbutton.FloatingActionsMenu
-        android:id="@+id/multiple_filtering"
+        android:id="@+id/multiple_filtering_whatif"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -75,7 +74,7 @@
         app:layout_constraintVertical_bias="0.985">
 
         <com.getbase.floatingactionbutton.FloatingActionButton
-            android:id="@+id/action_all"
+            android:id="@+id/action_all_whatif"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             fab:fab_colorNormal="@color/white"
@@ -84,7 +83,7 @@
             fab:fab_title="Everything!" />
 
         <com.getbase.floatingactionbutton.FloatingActionButton
-            android:id="@+id/action_nonveg"
+            android:id="@+id/action_nonveg_whatif"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:fab_icon="@drawable/meat_icon"
@@ -93,23 +92,13 @@
             fab:fab_title="Only Non-Vegetarian" />
 
         <com.getbase.floatingactionbutton.FloatingActionButton
-            android:id="@+id/action_veg"
+            android:id="@+id/action_veg_whatif"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             fab:fab_colorNormal="@color/white"
             fab:fab_colorPressed="@color/white_pressed"
             app:fab_icon="@drawable/leaf_icon"
             fab:fab_title="Only Vegetarian" />
-
-
-        <com.getbase.floatingactionbutton.FloatingActionButton
-            android:id="@+id/action_whatif"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            fab:fab_colorNormal="@color/white"
-            fab:fab_colorPressed="@color/white_pressed"
-            app:fab_icon="@drawable/magic_wand_icon"
-            fab:fab_title="Want More?" />
 
     </com.getbase.floatingactionbutton.FloatingActionsMenu>
 
