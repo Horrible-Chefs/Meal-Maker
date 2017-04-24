@@ -25,4 +25,5 @@ Turning Ideas Into Reality
 * Make sure you have entered the username, password and dbname in [SearchEngine.Class].
 * Make sure you have something in the SQLite Database. You can use the commented stubs in [MyPantry.Class] to add/remove a test record until [AddMore.Class] is implemented. **Edit: AddMore.Class has been implemented and tested, thus stubs removed.**
 * Testing for service using Publisher name has been implemented. All recipes can be queried by adding 'The Pioneer Woman' or 'All Recipes' or 'Cooking Cabinet' in the pantry.
-* Currently can only search for a certain number of ingredients(pre-defined amount). Will work on it to make it dynamic.
+* App supports all functionality. Recipe-Search, Ingridient List , Suggestions Feature , Deleting and adding to pantry.
+* Need to work on UI part of the app. Also recipe database has to be extended.
