@@ -47,6 +47,7 @@ public class ImHungry extends AppCompatActivity {
     private MyCustomAdapter myVegAdapter;
     private MyCustomAdapter myNonVegAdapter;
     private TextView tv;
+    private ArrayList<PantryItem> pantryData;
 
 
     @Override
@@ -56,7 +57,7 @@ public class ImHungry extends AppCompatActivity {
         setContentView(R.layout.imhungrylayout);
         recyclerView = (RecyclerView) findViewById(R.id.recycleView);
         tv = (TextView) findViewById(R.id.tv_recipeResults);
-
+        pantryData = (ArrayList<PantryItem>) getIntent().getSerializableExtra("pantry_data");
         final FloatingActionButton actionVeg = (FloatingActionButton) findViewById(R.id.action_veg);
         actionVeg.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,7 +77,7 @@ public class ImHungry extends AppCompatActivity {
                         Log.e(TAG, "JSON Parsing error.");
                     }
                 }
-                myVegAdapter = new MyCustomAdapter(ImHungry.this, vegRecipeNames, vegResults);
+                myVegAdapter = new MyCustomAdapter(ImHungry.this, vegRecipeNames, vegResults,pantryData);
                 recyclerView.setAdapter(myVegAdapter);
                 GridLayoutManager staggeredGridLayoutManager = new GridLayoutManager(ImHungry.this, 2);
                 recyclerView.setLayoutManager(staggeredGridLayoutManager);
@@ -102,7 +103,7 @@ public class ImHungry extends AppCompatActivity {
                         Log.e(TAG, "JSON Parsing error.");
                     }
                 }
-                myNonVegAdapter = new MyCustomAdapter(ImHungry.this, nVegRecipeNames, nonVegResults);
+                myNonVegAdapter = new MyCustomAdapter(ImHungry.this, nVegRecipeNames, nonVegResults,pantryData);
                 recyclerView.setAdapter(myNonVegAdapter);
                 GridLayoutManager staggeredGridLayoutManager = new GridLayoutManager(ImHungry.this, 2);
                 recyclerView.setLayoutManager(staggeredGridLayoutManager);
@@ -120,7 +121,6 @@ public class ImHungry extends AppCompatActivity {
             }
         });
 
-        final ArrayList<PantryItem> pantryData = (ArrayList<PantryItem>) getIntent().getSerializableExtra("pantry_data");
 
         final FloatingActionButton action_whatIf = (FloatingActionButton) findViewById(R.id.action_whatif);
         action_whatIf.setOnClickListener(new View.OnClickListener() {
@@ -153,16 +153,16 @@ public class ImHungry extends AppCompatActivity {
         }
 
         @Override
-        protected Void doInBackground(ArrayList<PantryItem>...pantryData) {
+        protected Void doInBackground(ArrayList<PantryItem>...pantryDataItems) {
             final SearchEngine searchEngine = new SearchEngine();
-            Iterator<Document> results = searchEngine.findExact(pantryData[0]);
+            Iterator<Document> results = searchEngine.findExact(pantryDataItems[0]);
             while (results.hasNext()) {
                 Document doc = results.next();
                 Log.i(TAG, "RECEIVED: " + doc.toJson());
                 recipeNames.add(new Information(R.drawable.recipe_logo, doc.get("title").toString()));
                 queryResult.put(doc.get("title").toString(), doc.toJson());
             }
-            myCustomAdapter = new MyCustomAdapter(ImHungry.this, recipeNames, queryResult);
+            myCustomAdapter = new MyCustomAdapter(ImHungry.this, recipeNames, queryResult, pantryData);
             searchEngine.disconnectService();
             return null;
         }

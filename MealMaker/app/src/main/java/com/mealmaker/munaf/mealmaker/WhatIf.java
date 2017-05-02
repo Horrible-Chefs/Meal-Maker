@@ -43,6 +43,8 @@ public class WhatIf extends AppCompatActivity {
     private MyCustomAdapter myCustomAdapter;
     private MyCustomAdapter myVegAdapter;
     private MyCustomAdapter myNonVegAdapter;
+    private ArrayList<PantryItem> pantryData;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +52,7 @@ public class WhatIf extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_what_if);
         recyclerView = (RecyclerView) findViewById(R.id.recycleView_whatif);
+        pantryData = (ArrayList<PantryItem>) getIntent().getSerializableExtra("pantry_data");
 
         final FloatingActionButton actionVeg = (FloatingActionButton) findViewById(R.id.action_veg_whatif);
         actionVeg.setOnClickListener(new View.OnClickListener() {
@@ -70,7 +73,7 @@ public class WhatIf extends AppCompatActivity {
                         Log.e(TAG, "JSON Parsing error.");
                     }
                 }
-                myVegAdapter = new MyCustomAdapter(WhatIf.this, vegRecipeNames, vegResults);
+                myVegAdapter = new MyCustomAdapter(WhatIf.this, vegRecipeNames, vegResults,pantryData);
                 recyclerView.setAdapter(myVegAdapter);
                 GridLayoutManager staggeredGridLayoutManager = new GridLayoutManager(WhatIf.this, 2);
                 recyclerView.setLayoutManager(staggeredGridLayoutManager);
@@ -96,7 +99,7 @@ public class WhatIf extends AppCompatActivity {
                         Log.e(TAG, "JSON Parsing error.");
                     }
                 }
-                myNonVegAdapter = new MyCustomAdapter(WhatIf.this, nVegRecipeNames, nonVegResults);
+                myNonVegAdapter = new MyCustomAdapter(WhatIf.this, nVegRecipeNames, nonVegResults,pantryData);
                 recyclerView.setAdapter(myNonVegAdapter);
                 GridLayoutManager staggeredGridLayoutManager = new GridLayoutManager(WhatIf.this, 2);
                 recyclerView.setLayoutManager(staggeredGridLayoutManager);
@@ -116,7 +119,7 @@ public class WhatIf extends AppCompatActivity {
 
         final FloatingActionsMenu menuMultipleFiltering = (FloatingActionsMenu) findViewById(R.id.multiple_filtering_whatif);
         Log.i(TAG,"getting bundles");
-        final ArrayList<PantryItem> pantryData = (ArrayList<PantryItem>) getIntent().getSerializableExtra("pantry_data");
+
         new WhatIf.AsyncServerAccess().execute(pantryData);
     }
 
@@ -136,16 +139,16 @@ public class WhatIf extends AppCompatActivity {
         }
 
         @Override
-        protected Void doInBackground(ArrayList<PantryItem>...pantryData) {
+        protected Void doInBackground(ArrayList<PantryItem>...pantryDataItems) {
             final SearchEngine searchEngine = new SearchEngine();
-            MongoCursor<Document> results = searchEngine.findAll(pantryData[0]);
+            MongoCursor<Document> results = searchEngine.findAll(pantryDataItems[0]);
             while (results.hasNext()) {
                 Document doc = results.next();
                 Log.i(TAG, "RECEIVED: " + doc.toJson());
                 recipeNames.add(new Information(R.drawable.recipe_logo, doc.get("title").toString()));
                 queryResult.put(doc.get("title").toString(), doc.toJson());
             }
-            myCustomAdapter = new MyCustomAdapter(WhatIf.this, recipeNames, queryResult);
+            myCustomAdapter = new MyCustomAdapter(WhatIf.this, recipeNames, queryResult,pantryData);
             searchEngine.disconnectService();
             return null;
         }

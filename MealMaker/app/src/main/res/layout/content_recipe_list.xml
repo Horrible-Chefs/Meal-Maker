@@ -8,11 +8,45 @@
     tools:context="com.mealmaker.munaf.mealmaker.RecipeList"
     tools:showIn="@layout/activity_recipe_list">
 
-    <TextView
-        android:id="@+id/tv_Text"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/text_margin"
-        android:text="@string/large_text" />
+        android:orientation="vertical">
 
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="title"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/tv_youHave"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="You Have:\n" />
+
+        <TextView
+            android:id="@+id/tv_youNeed"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="You Need:\n"
+            android:textColor="@color/pink" />
+
+        <TextView
+            android:id="@+id/tv_instructions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/tv_dr"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="@color/golden" />
+    </LinearLayout>
 </android.support.v4.widget.NestedScrollView>

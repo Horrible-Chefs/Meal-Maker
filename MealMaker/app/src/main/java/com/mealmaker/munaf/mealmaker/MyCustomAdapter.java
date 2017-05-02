@@ -27,11 +27,14 @@ public class MyCustomAdapter extends RecyclerView.Adapter<MyCustomAdapter.MyView
 
     private HashMap<String, String> queryResult;
 
-    public MyCustomAdapter(Context context, ArrayList<Information> data, HashMap<String, String> queryResult) {
+    private ArrayList<PantryItem> pantryData;
+
+    public MyCustomAdapter(Context context, ArrayList<Information> data, HashMap<String, String> queryResult, ArrayList<PantryItem> pantryData) {
         this.context = context;
         this.data = data;
         inflater = LayoutInflater.from(context);
         this.queryResult = queryResult;
+        this.pantryData = pantryData;
     }
 
     @Override
@@ -60,6 +63,7 @@ public class MyCustomAdapter extends RecyclerView.Adapter<MyCustomAdapter.MyView
                 TextView tv2 = myViewHolder.textview; //(TextView) v;
                 Intent intent_recipe = new Intent(context, RecipeList.class);
                 intent_recipe.putExtra("recipe_json", queryResult.get(tv2.getText().toString()));
+                intent_recipe.putExtra("current_items", pantryData);
                 context.startActivity(intent_recipe);
             }
         });
