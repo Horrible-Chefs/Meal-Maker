@@ -26,14 +26,14 @@ collection = db.cookbook
 
 if __name__ == "__main__":
 
-   with open('cookbook3.json') as json_data:
+   with open('cookbook_new.json') as json_data:
         recipes = json.load(json_data)
 
    for recipe in recipes:
         collection.insert_one(recipe)
 
    try:
-        pprint.pprint(collection.find_one({'title':'Orange Cream Cake II'}))
+        pprint.pprint(collection.find_one({'title':'Chicken Fettuccine with Roasted Red Pepper Sauce'}))
 
    finally:
         client.close()

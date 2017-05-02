@@ -1,6 +1,7 @@
 package com.mealmaker.munaf.mealmaker;
 
 import android.content.Intent;
+import android.nfc.Tag;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -16,12 +17,17 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.StringTokenizer;
 
 public class RecipeList extends AppCompatActivity {
 
     public static final String TAG = "RecipeList";
     private String subject = "";
-    private String body = "";
+    private String dontHaveString = "";
+    private String inst = "Instructions:\n";
+    private ArrayList<String> have = new ArrayList<>();
+    private ArrayList<String> dontHave = new ArrayList<>();
+    private ArrayList<String> itemNames = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,25 +36,22 @@ public class RecipeList extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(Intent.ACTION_SEND);
-                intent.setType("text/html");
-                intent.putExtra(Intent.EXTRA_EMAIL, "emailaddress@emailaddress.com");
-                intent.putExtra(Intent.EXTRA_SUBJECT, subject);
-                intent.putExtra(Intent.EXTRA_TEXT, body);
-                startActivity(Intent.createChooser(intent, "Send Email"));
-            }
-        });
-        TextView tv = (TextView) findViewById(R.id.tv_Text);
         String recipe =  getIntent().getExtras().getString("recipe_json");
-        tv.setText("");
-        String title = "";
-        String inst = "";
-        Integer dr = 0;
+        ArrayList<PantryItem> pd = (ArrayList<PantryItem>) getIntent().getSerializableExtra("current_items");
 
+        for (PantryItem item:pd){
+            itemNames.add(item.getName());
+        }
+
+        TextView tv_title = (TextView) findViewById(R.id.tv_title);
+        TextView tv_youHave = (TextView) findViewById(R.id.tv_youHave);
+        TextView tv_youNeed = (TextView) findViewById(R.id.tv_youNeed);
+        TextView tv_instruct = (TextView) findViewById(R.id.tv_instructions);
+        TextView tv_dr = (TextView) findViewById(R.id.tv_dr);
+
+        tv_title.setText("");
+        String title = "";
+        String dr = "";
 
         try {
             JSONObject jObject = new JSONObject(recipe);
@@ -62,7 +65,7 @@ public class RecipeList extends AppCompatActivity {
 //                }
 
                 if(key.equals("title")){
-                    subject="Shopping List for "+jObject.get(key);
+                    subject="Shopping List and Instructions for "+jObject.get(key);
                     title = jObject.getString(key)+"\n";
                 }
 
@@ -76,21 +79,29 @@ public class RecipeList extends AppCompatActivity {
                             list.add(jsonArray.get(i).toString());
                         }
                     }
-                    for (String s : list){
-                        list_str = list_str + s + "\n";
-                    }
-                    body="Ingredients:\n"+list_str;
+//                    for (String s : list){
+//                        list_str = list_str + s + "\n";
+//                    }
+                    haveOrNot(list);
+//                    body="Ingredients:\n"+list_str;
                 }
 
                 if(key.equals("instructions")){
-                    inst="Instructions:\n"+jObject.get(key);
+                    String line=jObject.get(key).toString();
+                    StringTokenizer stringTokenizer = new StringTokenizer(line,"\n");
+                    int count = 1;
+                    while (stringTokenizer.hasMoreTokens()){
+                        inst = inst + count +"."+stringTokenizer.nextToken()+"\n\n";
+                        count++;
+                    }
+
                 }
 
                 if(key.equals("diet_rest")){
                     if (jObject.get(key).equals("vegetarian")){
-                            dr = R.drawable.leaf_icon;
+                        dr = "Vegetarian";
                     }else{
-                            dr = R.drawable.meat_icon;
+                        dr = "Non-Vegetarian";
                     }
                 }
 //                if ( jObject.get(key) instanceof JSONObject ) {
@@ -98,12 +109,57 @@ public class RecipeList extends AppCompatActivity {
 //                }
             }
         }catch (JSONException je){
-            tv.append("Error! Am i connected to the internet?");
+            tv_title.append("Error! Am i connected to the internet?");
             Log.e(TAG, "JSON Parsing error.");
         }
-        tv.append(title+"\n"); //change activity 'title' to recipe name (where it says 'Recipe' rn)
-        tv.append(body+"\n");
-        tv.append(inst+"\n");
-        tv.append(dr.toString()); //use image view for veg/nonveg icon
+
+
+        tv_title.append(title+"\n"); //change activity 'title' to recipe name (where it says 'Recipe' rn)
+
+        String haveString = "";
+        for (String s : have){
+//            Log.i(TAG,""+s);
+            haveString = haveString + s + "\n";
+        }
+        Log.i(TAG,haveString);
+        tv_youHave.append(haveString+"\n");
+
+        for (String s : dontHave){
+            dontHaveString = dontHaveString + s + "\n";
+        }
+        tv_youNeed.append(dontHaveString+"\n");
+
+
+        tv_instruct.append(inst+"\n");
+        tv_dr.append(dr); //use image view for veg/nonveg icon
+
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Intent.ACTION_SEND);
+                intent.setType("text/html");
+                intent.putExtra(Intent.EXTRA_EMAIL, "emailaddress@emailaddress.com");
+                intent.putExtra(Intent.EXTRA_SUBJECT, subject);
+                intent.putExtra(Intent.EXTRA_TEXT, dontHaveString+"\n\n"+inst);
+                startActivity(Intent.createChooser(intent, "Send Email"));
+            }
+        });
+
+    }
+
+    private void haveOrNot(ArrayList<String> list) {
+        for(String s : list){
+            Log.i(TAG,s);
+            for (String i : itemNames){
+                if(s.toLowerCase().trim().contains(i) && !have.contains(s)){
+                    have.add(s);
+                }
+            }
+            if(!have.contains(s)){
+                dontHave.add(s);
+            }
+        }
+        Log.i(TAG, "have: " + have.size() + " donthave: " + dontHave.size());
     }
 }

@@ -18,7 +18,7 @@ with open('stopwords.csv', 'r') as csvfile:
 for s_word in initial_words:
 	stop_words.append(s_word)
 
-with open('recipes3.json', 'r') as pls:
+with open('recipes_new.json', 'r') as pls:
 	data = json.loads(pls.read())
 	for i in data:
 		cleaned_ing = []
@@ -56,8 +56,8 @@ with open('recipes3.json', 'r') as pls:
 pls.close()
 
 # DUMP JSON
-# with open('cookbook3.json', 'w') as fp:
-#     json.dump(cookbook, fp,sort_keys=True, indent=4)
+with open('cookbook_new.json', 'w') as fp:
+    json.dump(cookbook, fp,sort_keys=True, indent=4)
 
 # GET ALL RECIPE TITLES
 # f = open('titles.csv','w')
