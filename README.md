@@ -27,3 +27,4 @@ Turning Ideas Into Reality
 * Testing for service using Publisher name has been implemented. All recipes can be queried by adding 'The Pioneer Woman' or 'All Recipes' or 'Cooking Cabinet' in the pantry.
 * App supports all functionality. Recipe-Search, Ingridient List , Suggestions Feature , Deleting and adding to pantry.
 * Need to work on UI part of the app. Also recipe database has to be extended.
+* APK can be built from the Source Code. Basic UI designed - more work needed though. Still, it works!
